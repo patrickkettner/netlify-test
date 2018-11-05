@@ -1,7 +1,8 @@
 [build]
-  functions = "functions"
+  functions = ".netlify/functions"
   publish = "public"
   command = "npm run build"
 [[redirects]]
   from = "/download"
   to = "./.netlify/functions/download"
+  status = 302

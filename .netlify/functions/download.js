@@ -1,8 +1,9 @@
 exports.handler = function(event, context, callback) {
-  callback(null, {
-    statusCode: 200,
-    body: `
-      <!doctype html>
+  const UA = event.headers['user-agent']
+  let body;
+
+  if (UA.contains('Chrome')) {
+  body = ` <!doctype html>
       <html>
         <head>
           <title>testing 123</title>
@@ -11,7 +12,21 @@ exports.handler = function(event, context, callback) {
         <body>
           <pre>${event.headers['user-agent']}</pre>
         </body>
-      </html>
-    `
-  });
+      </html>`
+  } else {
+  body = `<!doctype html>
+      <html>
+        <head>
+          <title>testing 123</title>
+        </head>
+        <body>
+<pre>this is not chrome</chrome>
+        </body>
+      </html>`
+}
+
+  callback(null, {
+    statusCode: 200,
+    body
+});
 }

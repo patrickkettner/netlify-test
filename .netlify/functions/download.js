@@ -2,7 +2,7 @@ exports.handler = function(event, context, callback) {
   const UA = event.headers['user-agent']
   let body;
 
-  if (UA.contains('Chrome')) {
+  if (UA.includes('Chrome')) {
   body = ` <!doctype html>
       <html>
         <head>

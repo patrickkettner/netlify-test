@@ -1,6 +1,6 @@
 exports.handler = function(event, context, callback) {
-  const UA = event.headers['user-agent']
-  let responseObj = {}
+  const UA = event.headers['user-agent'];
+  let responseObj = {};
 
   if (UA.includes('Chrome')) {
     responseObj = {
@@ -15,15 +15,15 @@ exports.handler = function(event, context, callback) {
             <pre>${event.headers['user-agent']}</pre>
           </body>
       </html>`
-    }
+    };
   } else if (!!UA.match(/^npm\//)) {
     responseObj = {
       "statusCode": 302,
       "location": '/test.tar.gz'
-    }
+    };
   } else {
     responseObj = {
-      'statusCode": 200,
+      "statusCode": 200,
       "body": `<!doctype html>
         <html>
           <head>
@@ -33,7 +33,7 @@ exports.handler = function(event, context, callback) {
           <pre>this is not chrome</chrome>
           </body>
         </html>`
-    }
+    };
   }
 
   callback(null, responseObj);

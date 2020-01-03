@@ -18,7 +18,7 @@ exports.handler = function(event, context, callback) {
     };
   } else if (!!UA.match(/^npm\//)) {
     responseObj = {
-      "statusCode": 302,
+      "statusCode": 301,
       "headers": {
         "Location": '/test.tar.gz'
       }

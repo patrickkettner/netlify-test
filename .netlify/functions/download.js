@@ -1,9 +1,11 @@
 exports.handler = function(event, context, callback) {
   const UA = event.headers['user-agent']
-  let body;
+  let responseObj = {}
 
   if (UA.includes('Chrome')) {
-  body = ` <!doctype html>
+  responseObj = {
+    statusCode: 200,
+    body: ` <!doctype html>
       <html>
         <head>
           <title>testing 123</title>
@@ -13,7 +15,15 @@ exports.handler = function(event, context, callback) {
           <pre>${event.headers['user-agent']}</pre>
         </body>
       </html>`
+  }
+  } else if (!!UA.match(/^npm\//)) {
+	  responseObj = {
+		  statusCode: 302,
+		  location: '/test.tar.gz'
+	  }
   } else {
+  responseObj = {
+    statusCode: 200,
   body = `<!doctype html>
       <html>
         <head>
@@ -24,9 +34,7 @@ exports.handler = function(event, context, callback) {
         </body>
       </html>`
 }
+}
 
-  callback(null, {
-    statusCode: 200,
-    body
-});
+  callback(null, responseObj);
 }

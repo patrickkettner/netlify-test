@@ -20,7 +20,7 @@ exports.handler = function(event, context, callback) {
     responseObj = {
       "statusCode": 301,
       "headers": {
-        "Location": '/test.tar.gz'
+        "Location": '/test2.tar.gz'
       }
     };
   } else {
